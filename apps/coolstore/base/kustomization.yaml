@@ -30,5 +30,4 @@ resources:
 - orderdb-service.yaml
 - catalogdb-service.yaml
 - inventory-service.yaml
-- coolstore-ns.yaml
 - inventorydb-dc.yaml
