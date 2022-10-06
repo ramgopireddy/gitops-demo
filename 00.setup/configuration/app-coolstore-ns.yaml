@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: amq-streams-app
+  name: coolstore-app
   namespace: openshift-gitops
 spec:
   destination:
-    namespace: streams-demo
+    namespace: coolstore
     server: https://kubernetes.default.svc
   project: default
   source:
