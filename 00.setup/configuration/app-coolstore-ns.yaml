@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: apps/streams-cluster/overlays/coolstore
+    path: apps/coolstore/overlays/coolstore-ns
     repoURL: https://github.com/ramgopireddy/gitops-demo
     targetRevision: main
   syncPolicy:
