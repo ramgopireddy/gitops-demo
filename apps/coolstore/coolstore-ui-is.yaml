@@ -1,0 +1,24 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  annotations:
+  name: coolstore-ui
+  labels:
+    app: coolstore-ui
+    app.kubernetes.io/component: coolstore-ui
+    app.kubernetes.io/instance: coolstore-ui
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: 'latest'
+      annotations:
+        openshift.io/imported-from: 'rgopired/coolstore-ui:latest'
+      from:
+        kind: DockerImage
+        name: docker.io/rgopired/coolstore-ui:latest
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Source
+

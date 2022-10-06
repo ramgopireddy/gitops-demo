@@ -1,0 +1,78 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/connects-to: 'order,cart,catalog,inventory,order'
+    app.openshift.io/vcs-ref: ocp-4.5
+    app.openshift.io/vcs-uri: >-
+      https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m4-labs.git
+  name: coolstore-ui
+  labels:
+    app: coolstore-ui
+    app.kubernetes.io/part-of: coolstore
+    app.kubernetes.io/instance: coolstore-ui
+    app.kubernetes.io/component: coolstore-ui
+    provider: nodeshift
+    app.openshift.io/runtime: nodejs
+    version: 1.0.0
+    app.kubernetes.io/name: nodejs
+    project: coolstore-ui
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - coolstore-ui
+        from:
+          kind: ImageStreamTag
+          name: 'coolstore-ui:latest'
+  replicas: 1
+  revisionHistoryLimit: 2
+  test: false
+  selector:
+    app: coolstore-ui
+    project: coolstore-ui
+    provider: nodeshift
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: coolstore-ui
+        project: coolstore-ui
+        provider: nodeshift
+        version: 1.0.0
+      annotations:
+    spec:
+      containers:
+        - name: coolstore-ui
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources: {}
+          env:
+            - name: OPENSHIFT_BUILD_NAMESPACE
+              value: coolstore
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+          securityContext:
+            privileged: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+

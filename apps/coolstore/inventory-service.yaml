@@ -1,0 +1,32 @@
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+  name: inventory
+  labels:
+    app: inventory
+    app.kubernetes.io/component: inventory
+    app.kubernetes.io/instance: inventory
+    app.kubernetes.io/part-of: inventory
+    app.openshift.io/runtime-version: latest
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: 8443-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+    - name: 8778-tcp
+      protocol: TCP
+      port: 8778
+      targetPort: 8778
+  selector:
+    app: inventory
+    deploymentconfig: inventory
+  type: ClusterIP
+  sessionAffinity: None
+
+

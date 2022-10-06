@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+  name: catalog-database
+  labels:
+spec:
+  ports:
+    - name: postgresql
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  selector:
+    name: catalog-database
+  type: ClusterIP
+  sessionAffinity: None
+

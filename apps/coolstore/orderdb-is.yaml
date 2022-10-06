@@ -1,0 +1,23 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  annotations:
+  name: order-database
+  labels:
+    app: order-database
+    app.kubernetes.io/component: order-database
+    app.kubernetes.io/instance: order-database
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: '4.0'
+      annotations:
+        openshift.io/imported-from: 'mongo:4.0'
+      from:
+        kind: DockerImage
+        name: 'mongo:4.0'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Source

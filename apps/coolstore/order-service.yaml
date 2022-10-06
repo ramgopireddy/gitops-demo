@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+  name: order
+  labels:
+    app.kubernetes.io/name: order
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: order
+    deploymentconfig: order
+  type: ClusterIP
+  sessionAffinity: None
+

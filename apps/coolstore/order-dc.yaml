@@ -1,0 +1,65 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-uri: >-
+      https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m4-labs.git
+    app.openshift.io/connects-to: order-database
+  name: order
+  labels:
+    app: order
+    app.kubernetes.io/name: order
+    app.openshift.io/runtime: quarkus
+    app.kubernetes.io/part-of: order
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - order
+        from:
+          kind: ImageStreamTag
+          name: 'order:1.0-SNAPSHOT'
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: order
+    deploymentconfig: order
+  template:
+    metadata:
+      labels:
+        app: order
+        deploymentconfig: order
+      annotations:
+    spec:
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: order
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: File
+          image: >-
+            rgopired/order:1.0-SNAPSHOT
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+

@@ -1,0 +1,18 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  annotations:
+  name: catalog
+  labels:
+    app: catalog
+    app.kubernetes.io/component: catalog
+    app.kubernetes.io/instance: catalog
+spec:
+  path: /
+  to:
+    kind: Service
+    name: catalog
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None

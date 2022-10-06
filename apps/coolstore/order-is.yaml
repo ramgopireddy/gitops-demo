@@ -1,0 +1,23 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  annotations:
+  name: order
+  labels:
+    app: order
+    app.kubernetes.io/component: order
+    app.kubernetes.io/instance: order
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: '1.0-SNAPSHOT'
+      annotations:
+        openshift.io/imported-from: 'rgopired/order:1.0-SNAPSHOT'
+      from:
+        kind: DockerImage
+        name: 'rgopired/order:1.0-SNAPSHOT'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Source

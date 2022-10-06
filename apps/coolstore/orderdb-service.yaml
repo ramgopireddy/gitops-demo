@@ -1,0 +1,20 @@
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+  name: order-database
+  labels:
+    app: order-database
+    app.kubernetes.io/component: order-database
+    app.kubernetes.io/instance: order-database
+spec:
+  ports:
+    - name: 27017-tcp
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+  selector:
+    deploymentconfig: order-database
+  type: ClusterIP
+  sessionAffinity: None
+

@@ -1,0 +1,24 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  annotations:
+  name: cart
+  labels:
+    app: cart
+    app.kubernetes.io/component: cart
+    app.kubernetes.io/instance: cart
+    app.kubernetes.io/part-of: cart
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: 1.0-SNAPSHOT
+      annotations:
+        openshift.io/imported-from: 'rgopired/cart:1.0-SNAPSHOT'
+      from:
+        kind: DockerImage
+        name: 'rgopired/cart:1.0-SNAPSHOT'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Source

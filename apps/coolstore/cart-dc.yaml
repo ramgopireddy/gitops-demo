@@ -1,0 +1,69 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/connects-to: datagrid-service
+    app.openshift.io/vcs-uri: >-
+      https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m4-labs
+  name: cart
+  labels:
+    app: cart
+    app.kubernetes.io/component: cart
+    app.kubernetes.io/instance: cart
+    app.kubernetes.io/part-of: cart
+    app.openshift.io/runtime: quarkus
+    app.kubernetes.io/name: cart
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - cart
+        from:
+          kind: ImageStreamTag
+          name: 'cart:1.0-SNAPSHOT'
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: cart
+    deploymentconfig: cart
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cart
+        deploymentconfig: cart
+    spec:
+      containers:
+        - name: cart
+          image: >-
+            rgopired/cart:1.0-SNAPSHOT
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler

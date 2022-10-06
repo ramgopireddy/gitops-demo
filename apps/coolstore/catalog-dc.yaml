@@ -1,0 +1,71 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/connects-to: 'inventory,catalog-database'
+    app.openshift.io/vcs-ref: ocp-4.5
+    app.openshift.io/vcs-uri: >-
+      https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m4-labs
+  name: catalog
+  labels:
+    app: catalog
+    app.kubernetes.io/component: catalog
+    app.kubernetes.io/instance: catalog
+    app.kubernetes.io/part-of: catalog
+    app.openshift.io/runtime: spring
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - catalog
+        from:
+          kind: ImageStreamTag
+          name: 'catalog:latest'
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    deploymentconfig: catalog
+  template:
+    metadata:
+      labels:
+        deploymentconfig: catalog
+      annotations:
+    spec:
+      containers:
+        - name: catalog
+          image: >-
+            rgopired/catalog:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+          env:
+            - name: JAVA_OPTS_APPEND
+              value: '-Dspring.profiles.active=openshift'
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+

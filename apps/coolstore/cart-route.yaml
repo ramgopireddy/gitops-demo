@@ -1,0 +1,19 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  annotations:
+  name: cart
+  labels:
+    app.kubernetes.io/name: cart
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+    app.openshift.io/runtime: quarkus
+spec:
+  path: /
+  to:
+    kind: Service
+    name: cart
+    weight: 100
+  port:
+    targetPort: 8080
+  wildcardPolicy: None
+  
