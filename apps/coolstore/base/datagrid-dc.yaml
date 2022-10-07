@@ -44,7 +44,7 @@ spec:
       containers:
         - name: datagrid-service
           image: >-
-            infinispan/server:12.0.0.Final-1
+            infinispan/server@sha256:3090e8aaf031c69e48285515fb44e320fe8bfd9a999ee1ff3d3818b8ca71e9c9
           ports:
             - containerPort: 2157
               protocol: TCP

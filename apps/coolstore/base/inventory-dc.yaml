@@ -50,7 +50,7 @@ spec:
       containers:
         - name: inventory
           image: >-
-            rgopired/inventory:latest
+            rgopired/inventory@sha256:3a8e244c538a292cd17da450f94f1ad554b50060a290e2a83ec86310189a6be7
           ports:
             - containerPort: 8080
               protocol: TCP

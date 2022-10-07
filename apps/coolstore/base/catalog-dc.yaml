@@ -49,7 +49,7 @@ spec:
       containers:
         - name: catalog
           image: >-
-            rgopired/catalog:latest
+            rgopired/catalog@sha256:a80aa5b4923dab733c1a0679e8faa8a3ebc1b10aee1da7ec114df3bec720b002
           ports:
             - containerPort: 8080
               protocol: TCP

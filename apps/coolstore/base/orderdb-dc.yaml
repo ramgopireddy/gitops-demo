@@ -49,7 +49,7 @@ spec:
       containers:
         - name: order-database
           image: >-
-            order-database:4.0
+            mongo@sha256:f68f07e0c0ee86b1d848a30b27e5573e9c960748a02f7c288e28282297117644
           ports:
             - containerPort: 27017
               protocol: TCP
