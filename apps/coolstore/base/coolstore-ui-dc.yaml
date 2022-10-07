@@ -2,7 +2,8 @@ kind: DeploymentConfig
 apiVersion: apps.openshift.io/v1
 metadata:
   annotations:
-    app.openshift.io/connects-to: 'order,cart,catalog,inventory,order'
+    app.openshift.io/connects-to: >-
+      [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"cart"},{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"order"},{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"inventory"},{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"catalog"}]
     app.openshift.io/vcs-ref: ocp-4.5
     app.openshift.io/vcs-uri: >-
       https://github.com/RedHat-Middleware-Workshops/cloud-native-workshop-v2m4-labs.git
@@ -38,7 +39,7 @@ spec:
         from:
           kind: ImageStreamTag
           name: 'coolstore-ui:latest'
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 2
   test: false
   selector:
