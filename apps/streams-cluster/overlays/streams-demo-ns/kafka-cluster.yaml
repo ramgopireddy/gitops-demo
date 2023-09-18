@@ -5,7 +5,7 @@ metadata:
   namespace: streams-demo
 spec:
   kafka:
-    version: 3.1.0
+    version: 3.4.0
     replicas: 4
     listeners:
       - name: plain

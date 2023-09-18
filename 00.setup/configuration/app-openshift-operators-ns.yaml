@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: apps/operators/overlays/openshift-operators-ns
-    repoURL: https://github.com/naveenkendyala/gitops-demo
+    repoURL: https://github.com/ramgopireddy/gitops-demo
     targetRevision: main
   syncPolicy:
     automated:
