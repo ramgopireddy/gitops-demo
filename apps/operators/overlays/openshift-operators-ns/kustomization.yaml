@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: openshift-operators
 resources:
 - subscription-streams.yaml
+- subscription-servicemesh.yaml
