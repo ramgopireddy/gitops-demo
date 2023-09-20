@@ -11,6 +11,8 @@ oc apply -f 00.setup/configuration/app-openshift-operators-ns.yaml
 # Create a GitOps Application
 oc apply -f 00.setup/configuration/app-streams-demo-ns.yaml
 
+
+#Create an instance of service mesh for application
 oc apply -f 00.setup/configuration/app-svcmesh-demo.yaml
 
 
