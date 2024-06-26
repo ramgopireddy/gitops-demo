@@ -13,10 +13,10 @@ spec:
   tags:
     - name: '1.0-SNAPSHOT'
       annotations:
-        openshift.io/imported-from: 'rgopired/order:1.0-SNAPSHOT'
+        openshift.io/imported-from: 'quay.io/ramgopireddy/order:1.0-SNAPSHOT'
       from:
         kind: DockerImage
-        name: 'rgopired/order:1.0-SNAPSHOT'
+        name: 'quay.io/ramgopireddy/order:1.0-SNAPSHOT'
       generation: 2
       importPolicy: {}
       referencePolicy:
