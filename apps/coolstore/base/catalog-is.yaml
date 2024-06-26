@@ -14,10 +14,10 @@ spec:
   tags:
     - name: latest
       annotations:
-        openshift.io/imported-from: 'rgopired/catalog:latest'
+        openshift.io/imported-from: 'quay.io/ramgopireddy/catalog:latest'
       from:
         kind: DockerImage
-        name: 'rgopired/catalog:latest'
+        name: 'quay.io/ramgopireddy/catalog:latest'
       generation: 2
       importPolicy: {}
       referencePolicy:
