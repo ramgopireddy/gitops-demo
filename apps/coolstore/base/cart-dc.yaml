@@ -51,7 +51,7 @@ spec:
       containers:
         - name: cart
           image: >-
-            cart:1.0-SNAPSHOT
+            quay.io/ramgopireddy/cart@sha256:b5d0d5cc91a66d4c010a3f00ab3503af2240b6458836eb6cffc162b36d95948f
           ports:
             - containerPort: 8080
               protocol: TCP
