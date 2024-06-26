@@ -13,10 +13,10 @@ spec:
   tags:
     - name: 'latest'
       annotations:
-        openshift.io/imported-from: 'rgopired/coolstore-ui:latest'
+        openshift.io/imported-from: 'quay.io/ramgopireddy/coolstore-ui:latest'
       from:
         kind: DockerImage
-        name: docker.io/rgopired/coolstore-ui:latest
+        name: 'quay.io/ramgopireddy/coolstore-ui:latest'
       generation: 2
       importPolicy: {}
       referencePolicy:
