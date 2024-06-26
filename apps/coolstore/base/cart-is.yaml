@@ -17,7 +17,7 @@ spec:
         openshift.io/imported-from: 'rgopired/cart:1.0-SNAPSHOT'
       from:
         kind: DockerImage
-        name: 'rgopired/cart:1.0-SNAPSHOT'
+        name: 'quay.io/ramgopireddy/cart:1.0-SNAPSHOT'
       generation: 2
       importPolicy: {}
       referencePolicy:
