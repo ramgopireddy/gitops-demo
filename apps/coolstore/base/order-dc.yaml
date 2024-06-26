@@ -57,7 +57,7 @@ spec:
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: File
           image: >-
-            rgopired/order@sha256:77244d2ed7471bd31afdb6791c09962e66c0820eaf96e4d636f0676716813bfb
+            quay.io/ramgopireddy/order@sha256:77244d2ed7471bd31afdb6791c09962e66c0820eaf96e4d636f0676716813bfb
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
