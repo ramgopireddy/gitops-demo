@@ -39,7 +39,7 @@ spec:
         from:
           kind: ImageStreamTag
           name: 'coolstore-ui:latest'
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 2
   test: false
   selector:
